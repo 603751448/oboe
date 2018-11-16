@@ -76,12 +76,12 @@ public:
      *
      * @return buffer size
      */
-    virtual int32_t getBufferSizeInFrames() { return mBufferSizeInFrames; };
+    virtual uint32_t getBufferSizeInFrames() { return mBufferSizeInFrames; }
 
     /**
      * @return capacityInFrames or kUnspecified
      */
-    virtual int32_t getBufferCapacityInFrames() const { return mBufferCapacityInFrames; }
+    virtual uint32_t getBufferCapacityInFrames() const { return mBufferCapacityInFrames; }
 
     /**
      * @return the sharing mode of the stream.
@@ -138,14 +138,14 @@ protected:
     /** Stream audio device ID */
     int32_t                         mDeviceId = kUnspecified;
     /** Stream buffer capacity specified as a number of audio frames */
-    int32_t                         mBufferCapacityInFrames = kUnspecified;
+    uint32_t                         mBufferCapacityInFrames = kUnspecified;
     /** Stream buffer size specified as a number of audio frames */
-    int32_t                         mBufferSizeInFrames = kUnspecified;
+    uint32_t                         mBufferSizeInFrames = kUnspecified;
     /**
      * Number of frames which will be copied to/from the audio device in a single read/write
      * operation
      */
-    int32_t                         mFramesPerBurst = kUnspecified;
+    uint32_t                         mFramesPerBurst = kUnspecified;
 
     /** Stream sharing mode */
     SharingMode                     mSharingMode = SharingMode::Shared;

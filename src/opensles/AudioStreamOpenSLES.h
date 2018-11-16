@@ -57,7 +57,7 @@ public:
      */
     StreamState getState() override { return mState; }
 
-    int32_t getFramesPerBurst() override;
+    uint32_t getFramesPerBurst() override;
 
 
     AudioApi getAudioApi() const override {
@@ -79,10 +79,10 @@ public:
 
 protected:
 
-    SLuint32 channelCountToChannelMaskDefault(int channelCount);
+    SLuint32 channelCountToChannelMaskDefault(uint32_t channelCount);
 
-    virtual Result onBeforeDestroy() { return Result::OK; };
-    virtual Result onAfterDestroy() { return Result::OK; };
+    virtual Result onBeforeDestroy() { return Result::OK; }
+    virtual Result onAfterDestroy() { return Result::OK; }
 
     static SLuint32 getDefaultByteOrder();
 
@@ -113,7 +113,6 @@ protected:
 
     uint8_t              *mCallbackBuffer = nullptr;
     int32_t               mBytesPerCallback = oboe::kUnspecified;
-    int32_t               mFramesPerBurst = 0;
     StreamState           mState = StreamState::Uninitialized;
 
     MonotonicCounter      mPositionMillis; // for tracking OpenSL ES service position

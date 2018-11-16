@@ -118,7 +118,7 @@ public:
      * AAudio.h) and the value will be null.
      *
      */
-    static ResultWithValue<T> createBasedOnSign(T numericResult){
+    static ResultWithValue<T> createBasedOnSign(int32_t numericResult){
 
         // Ensure that the type is either an integer or float
         static_assert(std::is_arithmetic<T>::value,

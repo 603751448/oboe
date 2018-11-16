@@ -49,8 +49,8 @@ Result LatencyTuner::tune() {
         if (xRunCountResult == Result::OK) {
             if ((xRunCountResult.value() - mPreviousXRuns) > 0) {
                 mPreviousXRuns = xRunCountResult.value();
-                int32_t oldBufferSize = mStream.getBufferSizeInFrames();
-                int32_t requestedBufferSize = oldBufferSize + mStream.getFramesPerBurst();
+                uint32_t oldBufferSize = mStream.getBufferSizeInFrames();
+                uint32_t requestedBufferSize = oldBufferSize + mStream.getFramesPerBurst();
                 auto setBufferResult = mStream.setBufferSizeInFrames(requestedBufferSize);
                 if (setBufferResult != Result::OK) {
                     result = setBufferResult;

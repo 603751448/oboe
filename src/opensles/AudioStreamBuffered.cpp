@@ -211,10 +211,10 @@ ResultWithValue<int32_t> AudioStreamBuffered::read(void *buffer,
 }
 
 // Only supported when we are not using a callback.
-ResultWithValue<int32_t> AudioStreamBuffered::setBufferSizeInFrames(int32_t requestedFrames)
+ResultWithValue<uint32_t> AudioStreamBuffered::setBufferSizeInFrames(uint32_t requestedFrames)
 {
     if (getState() == StreamState::Closed){
-        return ResultWithValue<int32_t>(Result::ErrorClosed);
+        return ResultWithValue<uint32_t>(Result::ErrorClosed);
     }
 
     if (mFifoBuffer) {
@@ -224,20 +224,20 @@ ResultWithValue<int32_t> AudioStreamBuffered::setBufferSizeInFrames(int32_t requ
             requestedFrames = getFramesPerBurst();
         }
         mFifoBuffer->setThresholdFrames(requestedFrames);
-        return ResultWithValue<int32_t>(requestedFrames);
+        return ResultWithValue<uint32_t>(requestedFrames);
     } else {
-        return ResultWithValue<int32_t>(Result::ErrorUnimplemented);
+        return ResultWithValue<uint32_t>(Result::ErrorUnimplemented);
     }
 }
 
-int32_t AudioStreamBuffered::getBufferSizeInFrames() {
+uint32_t AudioStreamBuffered::getBufferSizeInFrames() {
     if (mFifoBuffer) {
         mBufferSizeInFrames = mFifoBuffer->getThresholdFrames();
     }
     return mBufferSizeInFrames;
 }
 
-int32_t AudioStreamBuffered::getBufferCapacityInFrames() const {
+uint32_t AudioStreamBuffered::getBufferCapacityInFrames() const {
     if (mFifoBuffer) {
         return mFifoBuffer->getBufferCapacityInFrames();
     } else {

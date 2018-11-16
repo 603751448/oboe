@@ -167,7 +167,7 @@ public:
     * @return the resulting buffer size in frames (obtained using value()) or an error (obtained
     * using error())
     */
-    virtual ResultWithValue<int32_t> setBufferSizeInFrames(int32_t requestedFrames) {
+    virtual ResultWithValue<uint32_t> setBufferSizeInFrames(uint32_t requestedFrames) {
         return Result::ErrorUnimplemented;
     }
 
@@ -197,7 +197,7 @@ public:
      *
      * @return burst size
      */
-    virtual int32_t getFramesPerBurst() = 0;
+    virtual uint32_t getFramesPerBurst() = 0;
 
     /**
      * Indicates whether the audio stream is playing.

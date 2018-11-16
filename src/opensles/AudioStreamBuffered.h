@@ -45,11 +45,11 @@ public:
                  int32_t numFrames,
                  int64_t timeoutNanoseconds) override;
 
-    ResultWithValue<int32_t> setBufferSizeInFrames(int32_t requestedFrames) override;
+    ResultWithValue<uint32_t> setBufferSizeInFrames(uint32_t requestedFrames) override;
 
-    int32_t getBufferSizeInFrames() override;
+    uint32_t getBufferSizeInFrames() override;
 
-    int32_t getBufferCapacityInFrames() const override;
+    uint32_t getBufferCapacityInFrames() const override;
 
     ResultWithValue<int32_t> getXRunCount() const override {
         return ResultWithValue<int32_t>(mXRunCount);
@@ -64,7 +64,7 @@ protected:
     // If there is no callback then we need a FIFO between the App and OpenSL ES.
     bool usingFIFO() const { return getCallback() == nullptr; }
 
-    virtual Result updateServiceFrameCounter() { return Result::OK; };
+    virtual Result updateServiceFrameCounter() { return Result::OK; }
 
     void updateFramesRead() override;
     void updateFramesWritten() override;

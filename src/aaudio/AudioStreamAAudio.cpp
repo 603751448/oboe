@@ -374,7 +374,7 @@ Result AudioStreamAAudio::waitForStateChange(StreamState currentState,
     return (currentState != *nextState) ? Result::OK : Result::ErrorTimeout;
 }
 
-ResultWithValue<int32_t> AudioStreamAAudio::setBufferSizeInFrames(int32_t requestedFrames) {
+ResultWithValue<uint32_t> AudioStreamAAudio::setBufferSizeInFrames(uint32_t requestedFrames) {
 
     AAudioStream *stream = mAAudioStream.load();
 
@@ -386,12 +386,12 @@ ResultWithValue<int32_t> AudioStreamAAudio::setBufferSizeInFrames(int32_t reques
         int32_t newBufferSize = mLibLoader->stream_setBufferSize(mAAudioStream, requestedFrames);
 
         // Cache the result if it's valid
-        if (newBufferSize > 0) mBufferSizeInFrames = newBufferSize;
+        if (newBufferSize > 0) mBufferSizeInFrames = static_cast<uint32_t>(newBufferSize);
 
-        return ResultWithValue<int32_t>::createBasedOnSign(newBufferSize);
+        return ResultWithValue<uint32_t>::createBasedOnSign(newBufferSize);
 
     } else {
-        return ResultWithValue<int32_t>(Result::ErrorClosed);
+        return ResultWithValue<uint32_t>(Result::ErrorClosed);
     }
 }
 
@@ -404,7 +404,7 @@ StreamState AudioStreamAAudio::getState() {
     }
 }
 
-int32_t AudioStreamAAudio::getBufferSizeInFrames() {
+uint32_t AudioStreamAAudio::getBufferSizeInFrames() {
     AAudioStream *stream = mAAudioStream.load();
     if (stream != nullptr) {
         mBufferSizeInFrames = mLibLoader->stream_getBufferSize(stream);
@@ -412,7 +412,7 @@ int32_t AudioStreamAAudio::getBufferSizeInFrames() {
     return mBufferSizeInFrames;
 }
 
-int32_t AudioStreamAAudio::getFramesPerBurst() {
+uint32_t AudioStreamAAudio::getFramesPerBurst() {
     AAudioStream *stream = mAAudioStream.load();
     if (stream != nullptr) {
         mFramesPerBurst = mLibLoader->stream_getFramesPerBurst(stream);

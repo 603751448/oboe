@@ -68,9 +68,9 @@ public:
                  int32_t numFrames,
                  int64_t timeoutNanoseconds) override;
 
-    ResultWithValue<int32_t> setBufferSizeInFrames(int32_t requestedFrames) override;
-    int32_t getBufferSizeInFrames() override;
-    int32_t getFramesPerBurst() override;
+    ResultWithValue<uint32_t> setBufferSizeInFrames(uint32_t requestedFrames) override;
+    uint32_t getBufferSizeInFrames() override;
+    uint32_t getFramesPerBurst() override;
     ResultWithValue<int32_t> getXRunCount() const override;
     bool isXRunCountSupported() const override { return true; }
 

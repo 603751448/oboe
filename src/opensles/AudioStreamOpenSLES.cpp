@@ -50,7 +50,7 @@ AudioStreamOpenSLES::~AudioStreamOpenSLES() {
 constexpr uint      kAudioChannelCountMax = 30u;
 constexpr SLuint32  SL_ANDROID_UNKNOWN_CHANNELMASK  = 0; // Matches name used internally.
 
-SLuint32 AudioStreamOpenSLES::channelCountToChannelMaskDefault(int channelCount) {
+SLuint32 AudioStreamOpenSLES::channelCountToChannelMaskDefault(uint32_t channelCount) {
     if (channelCount > kAudioChannelCountMax) {
         return SL_ANDROID_UNKNOWN_CHANNELMASK;
     } else {
@@ -284,7 +284,7 @@ SLresult AudioStreamOpenSLES::registerBufferQueueCallback() {
     return result;
 }
 
-int32_t AudioStreamOpenSLES::getFramesPerBurst() {
+uint32_t AudioStreamOpenSLES::getFramesPerBurst() {
     return mFramesPerBurst;
 }
 

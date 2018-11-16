@@ -85,7 +85,7 @@ int32_t FifoBuffer::convertFramesToBytes(int32_t frames) {
 }
 
 int32_t FifoBuffer::read(void *buffer, int32_t numFrames) {
-    size_t numBytes;
+    int32_t numBytes;
     int32_t framesAvailable = mFifo->getFullFramesAvailable();
     int32_t framesToRead = numFrames;
     // Is there enough data in the FIFO
@@ -102,7 +102,7 @@ int32_t FifoBuffer::read(void *buffer, int32_t numFrames) {
     if ((readIndex + framesToRead) > mFrameCapacity) {
         // read in two parts, first part here
         uint32_t frames1 = mFrameCapacity - readIndex;
-        uint32_t numBytes = convertFramesToBytes(frames1);
+        numBytes = convertFramesToBytes(frames1);
         memcpy(destination, source, numBytes);
         destination += numBytes;
         // read second part
